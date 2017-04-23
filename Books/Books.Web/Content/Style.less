@@ -1,0 +1,28 @@
+﻿@color: #1b95d3;
+
+.rounded-corners (@rad: 5px) {
+    -webkit-border-radius: @rad;
+    -moz-border-radius: @rad;
+    border-radius: @rad;
+}
+
+body {
+    color: @color;
+    .rounded-corners(3px);
+
+    &_al {
+        color: lightblue;
+    }
+}
+
+#header {
+    h1 {
+        font-size: large;
+    }
+    p {
+        font-size: medium;
+        a {
+            &:hover { border-width: thick; }
+        }
+    }
+}

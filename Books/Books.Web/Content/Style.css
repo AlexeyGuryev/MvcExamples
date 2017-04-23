@@ -1,0 +1,19 @@
+﻿body {
+  color: #1b95d3;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+body_al {
+  color: lightblue;
+}
+#header h1 {
+  font-size: large;
+}
+#header p {
+  font-size: medium;
+}
+#header p a:hover {
+  border-width: thick;
+}
+/*# sourceMappingURL=Style.css.map */

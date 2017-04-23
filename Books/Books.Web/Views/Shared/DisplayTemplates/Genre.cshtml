@@ -1,0 +1,6 @@
+﻿@using Books.Web.Helpers;
+@{
+    var itemName = typeof(Books.Entities.Genre).GetItemName((int?)Model);
+}
+
+@itemName

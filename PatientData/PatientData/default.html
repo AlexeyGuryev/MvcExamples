@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h3>Привет!</h3>
+
+    <button id="allPatients">Поциенты</button>
+
+    <pre id="output">
+    </pre>
+
+    <form id="regForm">
+        <input type="text" name="userName" placeholder="Почта" /><br/>
+        <input type="text" name="password" placeholder="Пароль"/><br />
+        <!--<input type="text" name="confirmPassword" placeholder="Подтверждение"/>
+        <input type="submit" id="register" value="Регистрация"/>-->
+        <input type="button" id="login" value="Вход"/>
+    </form>
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <!--<script src="Scripts/jquery-2.1.3.js"></script>-->
+    <script>
+        $(function () {
+            var showResponse = function (obj) {
+                $("#output").text(JSON.stringify(obj, null, 4))
+            };
+
+            var getHeaders = function () {
+                if (accessToken) {
+                    return { "Authorization": "Bearer " + accessToken };
+                }
+            }
+
+            var showPatients = function () {
+                var url = "http://localhost:53223/api/patients/";
+                $.ajax(url, {
+                    type: "GET",
+                    headers: getHeaders()
+                }).always(showResponse);
+                return false;
+            };
+
+            var register = function () {
+                var url = "api/Account/Register";
+                var data = $("#regForm").serialize();
+                $.post(url, data).always(showResponse);
+                return false;
+            };
+
+            var saveAccessToken = function (data) {
+                accessToken = data.access_token;
+            };
+
+            var login = function () {
+                var url = "/token";
+                var data = $("#regForm").serialize();
+                data = data + "&grant_type=password";
+
+                $.post(url, data)
+                    .success(saveAccessToken)
+                    .always(showResponse);
+            };
+
+            var accessToken = "";            
+            $("#allPatients").click(showPatients);
+            $("#register").click(register);
+            $("#login").click(login);
+        });
+    </script>
+</body>
+</html>
